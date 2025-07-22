@@ -1,0 +1,385 @@
+#pragma once
+
+namespace ApliacacaoCompleta { // Você pode renomear "ApliacacaoCompleta" se quiser
+
+	using namespace System;
+	using namespace System::ComponentModel;
+	using namespace System::Collections;
+	using namespace System::Windows::Forms;
+	using namespace System::Data;
+	using namespace System::Drawing;
+	using namespace System::Threading;
+	using namespace System::Diagnostics;
+
+	public ref class Form1 : public System::Windows::Forms::Form
+	{
+	public:
+		Form1(void)
+		{
+			InitializeComponent();
+		}
+
+	protected:
+		~Form1()
+		{
+			if (components)
+			{
+				delete components;
+			}
+		}
+
+	private:
+		// Componentes Visuais
+		System::Windows::Forms::PictureBox^  pboxOriginal;
+		System::Windows::Forms::PictureBox^  pboxCopia;
+		System::Windows::Forms::PictureBox^  pboxResultado;
+		System::Windows::Forms::Button^  btnAbrir;
+		System::Windows::Forms::Button^  btnCopiar;
+		System::Windows::Forms::Button^  btnLimparTudo;
+		System::Windows::Forms::Button^  btnSepiaCima;
+		System::Windows::Forms::Button^  btnSepiaBaixo;
+		System::Windows::Forms::Button^  btnPretoBrancoEsq;
+		System::Windows::Forms::Button^  btnPretoBrancoDir;
+		System::Windows::Forms::Button^  btnParalelo2;
+		System::Windows::Forms::Button^  btnParalelo4;
+		System::Windows::Forms::Button^  btnSepiaTotal;
+		System::Windows::Forms::Button^  btnPretoBrancoTotal;
+		System::Windows::Forms::Label^  lblOriginal;
+		System::Windows::Forms::Label^  lblCopia;
+		System::Windows::Forms::Label^  lblResultado;
+		System::Windows::Forms::Label^  lblTempo;
+		System::Windows::Forms::Label^  lblStatus;
+		System::ComponentModel::Container ^components;
+
+#pragma region Windows Form Designer generated code
+		void InitializeComponent(void)
+		{
+			this->pboxOriginal = (gcnew System::Windows::Forms::PictureBox());
+			this->pboxCopia = (gcnew System::Windows::Forms::PictureBox());
+			this->pboxResultado = (gcnew System::Windows::Forms::PictureBox());
+			this->btnAbrir = (gcnew System::Windows::Forms::Button());
+			this->btnCopiar = (gcnew System::Windows::Forms::Button());
+			this->btnLimparTudo = (gcnew System::Windows::Forms::Button());
+			this->btnSepiaCima = (gcnew System::Windows::Forms::Button());
+			this->btnSepiaBaixo = (gcnew System::Windows::Forms::Button());
+			this->btnPretoBrancoEsq = (gcnew System::Windows::Forms::Button());
+			this->btnPretoBrancoDir = (gcnew System::Windows::Forms::Button());
+			this->btnParalelo2 = (gcnew System::Windows::Forms::Button());
+			this->btnParalelo4 = (gcnew System::Windows::Forms::Button());
+			this->btnSepiaTotal = (gcnew System::Windows::Forms::Button());
+			this->btnPretoBrancoTotal = (gcnew System::Windows::Forms::Button());
+			this->lblOriginal = (gcnew System::Windows::Forms::Label());
+			this->lblCopia = (gcnew System::Windows::Forms::Label());
+			this->lblResultado = (gcnew System::Windows::Forms::Label());
+			this->lblTempo = (gcnew System::Windows::Forms::Label());
+			this->lblStatus = (gcnew System::Windows::Forms::Label());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxOriginal))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxCopia))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxResultado))->BeginInit();
+			this->SuspendLayout();
+			// 
+			// Labels dos Painéis
+			// 
+			this->lblOriginal->AutoSize = true;
+			this->lblOriginal->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblOriginal->Location = System::Drawing::Point(12, 9);
+			this->lblOriginal->Text = L"Original";
+			// 
+			this->lblCopia->AutoSize = true;
+			this->lblCopia->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblCopia->Location = System::Drawing::Point(422, 9);
+			this->lblCopia->Text = L"Cópia";
+			// 
+			this->lblResultado->AutoSize = true;
+			this->lblResultado->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblResultado->Location = System::Drawing::Point(832, 9);
+			this->lblResultado->Text = L"Resultado";
+			// 
+			// PictureBoxes
+			// 
+			this->pboxOriginal->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->pboxOriginal->Location = System::Drawing::Point(12, 27);
+			this->pboxOriginal->Name = L"pboxOriginal";
+			this->pboxOriginal->Size = System::Drawing::Size(350, 280);
+			this->pboxOriginal->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			// 
+			this->pboxCopia->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->pboxCopia->Location = System::Drawing::Point(422, 27);
+			this->pboxCopia->Name = L"pboxCopia";
+			this->pboxCopia->Size = System::Drawing::Size(350, 280);
+			this->pboxCopia->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			// 
+			this->pboxResultado->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->pboxResultado->Location = System::Drawing::Point(832, 27);
+			this->pboxResultado->Name = L"pboxResultado";
+			this->pboxResultado->Size = System::Drawing::Size(350, 280);
+			this->pboxResultado->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			// 
+			// Botões - Primeira Fila
+			// 
+			this->btnAbrir->Location = System::Drawing::Point(12, 328);
+			this->btnAbrir->Size = System::Drawing::Size(100, 30);
+			this->btnAbrir->Text = L"Abrir Imagem";
+			this->btnAbrir->Click += gcnew System::EventHandler(this, &Form1::btnAbrir_Click);
+			// 
+			this->btnCopiar->Location = System::Drawing::Point(122, 328);
+			this->btnCopiar->Size = System::Drawing::Size(100, 30);
+			this->btnCopiar->Text = L"Copiar";
+			this->btnCopiar->Click += gcnew System::EventHandler(this, &Form1::btnCopiar_Click);
+			// 
+			this->btnLimparTudo->Location = System::Drawing::Point(232, 328);
+			this->btnLimparTudo->Size = System::Drawing::Size(100, 30);
+			this->btnLimparTudo->Text = L"Limpar Tudo";
+			this->btnLimparTudo->Click += gcnew System::EventHandler(this, &Form1::btnLimparTudo_Click);
+			// 
+			// Botões - Segunda Fila
+			// 
+			this->btnSepiaCima->Location = System::Drawing::Point(12, 368);
+			this->btnSepiaCima->Size = System::Drawing::Size(120, 30);
+			this->btnSepiaCima->Text = L"Sépia Metade Cima";
+			this->btnSepiaCima->Click += gcnew System::EventHandler(this, &Form1::btnSepiaCima_Click);
+			// 
+			this->btnSepiaBaixo->Location = System::Drawing::Point(142, 368);
+			this->btnSepiaBaixo->Size = System::Drawing::Size(120, 30);
+			this->btnSepiaBaixo->Text = L"Sépia Metade Baixo";
+			this->btnSepiaBaixo->Click += gcnew System::EventHandler(this, &Form1::btnSepiaBaixo_Click);
+			// 
+			this->btnPretoBrancoEsq->Location = System::Drawing::Point(272, 368);
+			this->btnPretoBrancoEsq->Size = System::Drawing::Size(120, 30);
+			this->btnPretoBrancoEsq->Text = L"P&B Metade Esq.";
+			this->btnPretoBrancoEsq->Click += gcnew System::EventHandler(this, &Form1::btnPretoBrancoEsq_Click);
+			// 
+			this->btnPretoBrancoDir->Location = System::Drawing::Point(402, 368);
+			this->btnPretoBrancoDir->Size = System::Drawing::Size(120, 30);
+			this->btnPretoBrancoDir->Text = L"P&B Metade Dir.";
+			this->btnPretoBrancoDir->Click += gcnew System::EventHandler(this, &Form1::btnPretoBrancoDir_Click);
+			// 
+			// Botões - Terceira Fila
+			// 
+			this->btnParalelo2->BackColor = System::Drawing::Color::LightGreen;
+			this->btnParalelo2->Location = System::Drawing::Point(12, 408);
+			this->btnParalelo2->Size = System::Drawing::Size(150, 30);
+			this->btnParalelo2->Text = L"Paralelo (2 Threads)";
+			this->btnParalelo2->Click += gcnew System::EventHandler(this, &Form1::btnParalelo2_Click);
+			// 
+			this->btnParalelo4->BackColor = System::Drawing::Color::LightBlue;
+			this->btnParalelo4->Location = System::Drawing::Point(172, 408);
+			this->btnParalelo4->Size = System::Drawing::Size(150, 30);
+			this->btnParalelo4->Text = L"Paralelo (4 Threads)";
+			this->btnParalelo4->Click += gcnew System::EventHandler(this, &Form1::btnParalelo4_Click);
+			// 
+			this->btnSepiaTotal->Location = System::Drawing::Point(332, 408);
+			this->btnSepiaTotal->Size = System::Drawing::Size(120, 30);
+			this->btnSepiaTotal->Text = L"Sépia Total";
+			this->btnSepiaTotal->Click += gcnew System::EventHandler(this, &Form1::btnSepiaTotal_Click);
+			// 
+			this->btnPretoBrancoTotal->Location = System::Drawing::Point(462, 408);
+			this->btnPretoBrancoTotal->Size = System::Drawing::Size(120, 30);
+			this->btnPretoBrancoTotal->Text = L"P&B Total";
+			this->btnPretoBrancoTotal->Click += gcnew System::EventHandler(this, &Form1::btnPretoBrancoTotal_Click);
+			// 
+			// Labels de Status
+			// 
+			this->lblTempo->Font = (gcnew System::Drawing::Font(L"Consolas", 9.75F, System::Drawing::FontStyle::Bold));
+			this->lblTempo->Location = System::Drawing::Point(12, 460);
+			this->lblTempo->Text = L"Processing Time: 0 ms";
+			// 
+			this->lblStatus->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9F));
+			this->lblStatus->ForeColor = System::Drawing::SystemColors::ControlDarkDark;
+			this->lblStatus->Location = System::Drawing::Point(12, 480);
+			this->lblStatus->Text = L"Ready - Impact Lab 2025";
+			// 
+			// Form1
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(1200, 511);
+			this->Controls->Add(this->lblOriginal);
+			this->Controls->Add(this->lblCopia);
+			this->Controls->Add(this->lblResultado);
+			this->Controls->Add(this->pboxOriginal);
+			this->Controls->Add(this->pboxCopia);
+			this->Controls->Add(this->pboxResultado);
+			this->Controls->Add(this->btnAbrir);
+			this->Controls->Add(this->btnCopiar);
+			this->Controls->Add(this->btnLimparTudo);
+			this->Controls->Add(this->btnSepiaCima);
+			this->Controls->Add(this->btnSepiaBaixo);
+			this->Controls->Add(this->btnPretoBrancoEsq);
+			this->Controls->Add(this->btnPretoBrancoDir);
+			this->Controls->Add(this->btnParalelo2);
+			this->Controls->Add(this->btnParalelo4);
+			this->Controls->Add(this->btnSepiaTotal);
+			this->Controls->Add(this->btnPretoBrancoTotal);
+			this->Controls->Add(this->lblTempo);
+			this->Controls->Add(this->lblStatus);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
+			this->Name = L"Form1";
+			this->Text = L"MY PROJECT IMAGE LAB 2024 - Impact Lab 2025";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxOriginal))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxCopia))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxResultado))->EndInit();
+			this->ResumeLayout(false);
+		}
+#pragma endregion
+
+	private:
+		// Funções de Filtro Genéricas
+		void AplicarFiltro(Bitmap^ bmp, String^ tipoFiltro, int startX, int endX, int startY, int endY) {
+			for (int y = startY; y < endY; y++) {
+				for (int x = startX; x < endX; x++) {
+					Color p = bmp->GetPixel(x, y);
+					if (tipoFiltro == "sepia") {
+						int r = p.R, g = p.G, b = p.B;
+						int tr = (int)(0.393 * r + 0.769 * g + 0.189 * b);
+						int tg = (int)(0.349 * r + 0.686 * g + 0.168 * b);
+						int tb = (int)(0.272 * r + 0.534 * g + 0.131 * b);
+						if (tr > 255) r = 255; else r = tr;
+						if (tg > 255) g = 255; else g = tg;
+						if (tb > 255) b = 255; else b = tb;
+						bmp->SetPixel(x, y, Color::FromArgb(p.A, r, g, b));
+					}
+					else if (tipoFiltro == "pb") {
+						int media = (p.R + p.G + p.B) / 3;
+						bmp->SetPixel(x, y, Color::FromArgb(p.A, media, media, media));
+					}
+				}
+			}
+		}
+
+		// Métodos para execução em Threads
+		void ProcessarImagem(Object^ params) {
+			array<Object^>^ arr = (array<Object^>^)params;
+			Bitmap^ bmp = (Bitmap^)arr[0];
+			String^ tipoFiltro = (String^)arr[1];
+			int startX = (int)arr[2];
+			int endX = (int)arr[3];
+			int startY = (int)arr[4];
+			int endY = (int)arr[5];
+			AplicarFiltro(bmp, tipoFiltro, startX, endX, startY, endY);
+		}
+		
+		// Eventos de Clique dos Botões de Controle
+		System::Void btnAbrir_Click(System::Object^ sender, System::EventArgs^ e) {
+			OpenFileDialog^ openFileDialog = gcnew OpenFileDialog();
+			openFileDialog->Filter = "Imagens (*.BMP;*.JPG;*.PNG)|*.BMP;*.JPG;*.PNG";
+			if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				pboxOriginal->Image = Image::FromFile(openFileDialog->FileName);
+				lblStatus->Text = "Imagem carregada: " + openFileDialog->SafeFileName;
+			}
+		}
+
+		System::Void btnCopiar_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (pboxOriginal->Image == nullptr) return;
+			pboxCopia->Image = gcnew Bitmap(pboxOriginal->Image);
+			lblStatus->Text = "Imagem copiada para o painel do meio.";
+		}
+
+		System::Void btnLimparTudo_Click(System::Object^ sender, System::EventArgs^ e) {
+			pboxOriginal->Image = nullptr;
+			pboxCopia->Image = nullptr;
+			pboxResultado->Image = nullptr;
+			lblStatus->Text = "Painéis limpos. Pronto.";
+			lblTempo->Text = "Processing Time: 0 ms";
+		}
+
+		// Eventos de Clique dos Filtros (1 Thread)
+		void ExecutarFiltroSimples(String^ filtro, String^ local) {
+			if (pboxCopia->Image == nullptr) {
+				MessageBox::Show("Copie uma imagem para o painel do meio primeiro.");
+				return;
+			}
+			Bitmap^ bmpProcessado = gcnew Bitmap(pboxCopia->Image);
+			Stopwatch^ cronometro = Stopwatch::StartNew();
+
+			int w = bmpProcessado->Width;
+			int h = bmpProcessado->Height;
+			int midY = h / 2;
+			int midX = w / 2;
+
+			if (local == "total") AplicarFiltro(bmpProcessado, filtro, 0, w, 0, h);
+			else if (local == "cima") AplicarFiltro(bmpProcessado, filtro, 0, w, 0, midY);
+			else if (local == "baixo") AplicarFiltro(bmpProcessado, filtro, 0, w, midY, h);
+			else if (local == "esq") AplicarFiltro(bmpProcessado, filtro, 0, midX, 0, h);
+			else if (local == "dir") AplicarFiltro(bmpProcessado, filtro, midX, w, 0, h);
+
+			cronometro->Stop();
+			pboxResultado->Image = bmpProcessado;
+			lblTempo->Text = "Processing Time: " + cronometro->ElapsedMilliseconds + " ms";
+			lblStatus->Text = "Filtro " + filtro + " aplicado em " + local;
+		}
+
+		System::Void btnSepiaTotal_Click(System::Object^ sender, System::EventArgs^ e) { ExecutarFiltroSimples("sepia", "total"); }
+		System::Void btnPretoBrancoTotal_Click(System::Object^ sender, System::EventArgs^ e) { ExecutarFiltroSimples("pb", "total"); }
+		System::Void btnSepiaCima_Click(System::Object^ sender, System::EventArgs^ e) { ExecutarFiltroSimples("sepia", "cima"); }
+		System::Void btnSepiaBaixo_Click(System::Object^ sender, System::EventArgs^ e) { ExecutarFiltroSimples("sepia", "baixo"); }
+		System::Void btnPretoBrancoEsq_Click(System::Object^ sender, System::EventArgs^ e) { ExecutarFiltroSimples("pb", "esq"); }
+		System::Void btnPretoBrancoDir_Click(System::Object^ sender, System::EventArgs^ e) { ExecutarFiltroSimples("pb", "dir"); }
+
+		// Eventos de Clique dos Filtros Paralelos
+		System::Void btnParalelo2_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (pboxCopia->Image == nullptr) { MessageBox::Show("Copie uma imagem para o painel do meio primeiro."); return; }
+			
+			Bitmap^ bmpProcessado = gcnew Bitmap(pboxCopia->Image);
+			Stopwatch^ cronometro = Stopwatch::StartNew();
+
+			int w = bmpProcessado->Width;
+			int h = bmpProcessado->Height;
+			
+			array<Object^>^ params1 = { bmpProcessado, "sepia", 0, w, 0, h/2 };
+			array<Object^>^ params2 = { bmpProcessado, "pb", 0, w, h/2, h };
+
+			Thread^ t1 = gcnew Thread(gcnew ParameterizedThreadStart(this, &Form1::ProcessarImagem));
+			Thread^ t2 = gcnew Thread(gcnew ParameterizedThreadStart(this, &Form1::ProcessarImagem));
+
+			t1->Start(params1);
+			t2->Start(params2);
+
+			t1->Join();
+			t2->Join();
+
+			cronometro->Stop();
+			pboxResultado->Image = bmpProcessado;
+			lblTempo->Text = "Processing Time: " + cronometro->ElapsedMilliseconds + " ms";
+			lblStatus->Text = "Processamento paralelo com 2 threads concluído.";
+		}
+
+		System::Void btnParalelo4_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (pboxCopia->Image == nullptr) { MessageBox::Show("Copie uma imagem para o painel do meio primeiro."); return; }
+
+			Bitmap^ bmpProcessado = gcnew Bitmap(pboxCopia->Image);
+			Stopwatch^ cronometro = Stopwatch::StartNew();
+
+			int w = bmpProcessado->Width;
+			int h = bmpProcessado->Height;
+			int midX = w / 2;
+			int midY = h / 2;
+
+			array<Object^>^ p_tl = { bmpProcessado, "sepia", 0, midX, 0, midY };      // Top-Left
+			array<Object^>^ p_tr = { bmpProcessado, "pb", midX, w, 0, midY };         // Top-Right
+			array<Object^>^ p_bl = { bmpProcessado, "pb", 0, midX, midY, h };         // Bottom-Left
+			array<Object^>^ p_br = { bmpProcessado, "sepia", midX, w, midY, h };      // Bottom-Right
+
+			Thread^ t_tl = gcnew Thread(gcnew ParameterizedThreadStart(this, &Form1::ProcessarImagem));
+			Thread^ t_tr = gcnew Thread(gcnew ParameterizedThreadStart(this, &Form1::ProcessarImagem));
+			Thread^ t_bl = gcnew Thread(gcnew ParameterizedThreadStart(this, &Form1::ProcessarImagem));
+			Thread^ t_br = gcnew Thread(gcnew ParameterizedThreadStart(this, &Form1::ProcessarImagem));
+
+			t_tl->Start(p_tl);
+			t_tr->Start(p_tr);
+			t_bl->Start(p_bl);
+			t_br->Start(p_br);
+
+			t_tl->Join();
+			t_tr->Join();
+			t_bl->Join();
+			t_br->Join();
+
+			cronometro->Stop();
+			pboxResultado->Image = bmpProcessado;
+			lblTempo->Text = "Processing Time: " + cronometro->ElapsedMilliseconds + " ms";
+			lblStatus->Text = "Processamento paralelo com 4 threads concluído.";
+		}
+	};
+}
